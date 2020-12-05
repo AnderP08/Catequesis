@@ -1,0 +1,143 @@
+/*==============================================================*/
+/* DBMS name:      PostgreSQL 8                                 */
+/* Created on:     3/12/2020 20:30:14                           */
+/*==============================================================*/
+
+
+/*==============================================================*/
+/* Table: AULA                                                  */
+/*==============================================================*/
+create table AULA (
+   ID_AUL               INT                  not null,
+   NUMERO_AUL           INT                  not null,
+   constraint PK_AULA primary key (ID_AUL)
+);
+
+
+/*==============================================================*/
+/* Table: CATECUMENO                                            */
+/*==============================================================*/
+create table CATECUMENO (
+   ID_CATEC             INT                  not null,
+   ID_CAT               INT                  not null,
+   ID_AUL               INT                  not null,
+   ID_REP               INT                  not null,
+   ID_NIV               INT                  not null,
+   CEDULA_CATEC         INT                  not null,
+   APELLIDO_CATEC       VARCHAR(50)          not null,
+   NOMBRE_CATEC         VARCHAR(50)          not null,
+   DIRECCION_CATEC      VARCHAR(100)         not null,
+   FECHANACIMIENTO_CATEC DATE                 not null,
+   constraint PK_CATECUMENO primary key (ID_CATEC)
+);
+
+
+/*==============================================================*/
+/* Table: CATEQUISTA                                            */
+/*==============================================================*/
+create table CATEQUISTA (
+   ID_CAT               INT                  not null,
+   ID_NIV               INT                  not null,
+   CEDULA_CAT           INT                  not null,
+   APELLIDO_CAT         VARCHAR(50)          not null,
+   NOMBRE_CAT           VARCHAR(50)          not null,
+   DIRECCION_CAT        VARCHAR(100)         not null,
+   CELULAR_CAT          INT                  not null,
+   FECHANACIMIENTO_CAT  DATE                 not null,
+   GENERO_CAT           VARCHAR(15)          not null,
+   constraint PK_CATEQUISTA primary key (ID_CAT)
+);
+
+
+/*==============================================================*/
+/* Table: CAT_AUL                                               */
+/*==============================================================*/
+create table CAT_AUL (
+   ID_AUL               INT                  not null,
+   ID_CAT               INT                  not null,
+   constraint PK_CAT_AUL primary key (ID_AUL, ID_CAT)
+);
+
+
+/*==============================================================*/
+/* Table: MATRICULA                                             */
+/*==============================================================*/
+create table MATRICULA (
+   ID_MATRI             INT                  not null,
+   ID_CATEC             INT                  not null,
+   ID_NIV               INT                  not null,
+   VALOR_MATRI          DECIMAL              not null,
+   FECHAMATRICULA_MATRI DATE                 not null,
+   NUMEROMATRICULA_MATRI VARCHAR(10)         not null,
+   ESTADO_MATRI         VARCHAR(10)          not null,
+   constraint PK_MATRICULA primary key (ID_MATRI)
+);
+
+
+/*==============================================================*/
+/* Table: NIVEL                                                 */
+/*==============================================================*/
+create table NIVEL (
+   ID_NIV               INT                  not null,
+   DESCRIPCION_NIV      VARCHAR(20)          not null,
+   NIVEL_NIV            INT                  not null,
+   constraint PK_NIVEL primary key (ID_NIV)
+);
+
+
+/*==============================================================*/
+/* Table: REPRESENTANTE                                         */
+/*==============================================================*/
+create table REPRESENTANTE (
+   ID_REP               INT                  not null,
+   APELLIDO_REP         VARCHAR(50)          not null,
+   NOMBRE_REP           VARCHAR(50)          not null,
+   CEDULA_REP           INT          	     not null,
+   DIRECCION_REP        VARCHAR(100)         not null,
+   CELULAR_REP          INT                  not null,
+   FAMILIAR_REP         VARCHAR(2)           not null,
+   VINCULO_REP		VARCHAR(20)	     not null,
+   constraint PK_REPRESENTANTE primary key (ID_REP)
+);
+
+
+alter table CATECUMENO
+   add constraint FK_CATECUME_CATEC_NIV_NIVEL foreign key (ID_NIV)
+      references NIVEL (ID_NIV)
+      on delete restrict on update restrict;
+
+alter table CATECUMENO
+   add constraint FK_CATECUME_CATEC_REP_REPRESEN foreign key (ID_REP)
+      references REPRESENTANTE (ID_REP)
+      on delete restrict on update restrict;
+
+alter table CATECUMENO
+   add constraint FK_CATECUME_CAT_CATEC_CATEQUIS foreign key (ID_CAT)
+      references CATEQUISTA (ID_CAT)
+      on delete restrict on update restrict;
+
+alter table CATEQUISTA
+   add constraint FK_CATEQUIS_CAT_NIV_NIVEL foreign key (ID_NIV)
+      references NIVEL (ID_NIV)
+      on delete restrict on update restrict;
+
+alter table CAT_AUL
+   add constraint FK_CAT_AUL_CAT_AUL_AULA foreign key (ID_AUL)
+      references AULA (ID_AUL)
+      on delete restrict on update restrict;
+
+alter table CAT_AUL
+   add constraint FK_CAT_AUL_CAT_AUL2_CATEQUIS foreign key (ID_CAT)
+      references CATEQUISTA (ID_CAT)
+      on delete restrict on update restrict;
+
+alter table MATRICULA
+   add constraint FK_MATRICUL_CATEC_MAT_CATECUME foreign key (ID_CATEC)
+      references CATECUMENO (ID_CATEC)
+      on delete restrict on update restrict;
+
+alter table MATRICULA
+   add constraint FK_MATRICUL_NIV_MATRI_NIVEL foreign key (ID_NIV)
+      references NIVEL (ID_NIV)
+      on delete restrict on update restrict;
+
