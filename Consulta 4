@@ -1,0 +1,12 @@
+/* Cantidad de catecúmenos inscritos en los diferentes periodos 2018 */
+
+SELECT 
+  nivel.descripcion_niv,
+  count(matricula.fechamatricula_matri)as cantidad2018
+FROM 
+  public.matricula 
+  inner join public.nivel on matricula.id_niv = nivel.id_niv
+WHERE 
+  matricula.fechamatricula_matri between '2018-01-01' and '2018-12-31'
+GROUP BY
+  nivel.descripcion_niv
