@@ -1,0 +1,13 @@
+/*	Cantidad de usuarios que aprobaron primera comunión y confirmación. */
+
+SELECT
+	nivel.descripcion_niv,
+	COUNT(matricula.estado_matri)as t_aprobado
+FROM 
+	public.matricula
+	inner join public.catecumeno on catecumeno.id_catec = matricula.id_catec
+	inner join public.nivel on  nivel.id_niv = matricula.id_niv
+WHERE 
+	estado_matri like '%Aprobado%'
+GROUP BY
+	nivel.descripcion_niv
