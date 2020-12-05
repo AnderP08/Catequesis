@@ -7,6 +7,7 @@ FROM
   public.matricula 
   inner join public.nivel on matricula.id_niv = nivel.id_niv
 WHERE 
-  matricula.fechamatricula_matri between '2018-01-01' and '2018-12-31'
+  /*matricula.fechamatricula_matri between '2018-01-01' and '2018-12-31'*/
+  extract(year from matricula.fechamatricula_matri) = 2018
 GROUP BY
   nivel.descripcion_niv
