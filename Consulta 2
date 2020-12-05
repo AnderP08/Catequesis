@@ -1,0 +1,12 @@
+/*	Cantidad de catequistas hombres y mujeres que tiene cada nivel.*/
+
+SELECT 
+	nivel.descripcion_niv, 
+	count(catequista.genero_cat)as c_mujer
+FROM 
+	public.catequista
+	inner join public.nivel on nivel.id_niv = catequista.id_niv
+WHERE 
+	catequista.genero_cat like '%F%'
+GROUP BY
+	nivel.descripcion_niv
