@@ -2,12 +2,15 @@
 
 SELECT 
   nivel.descripcion_niv,
-  count(matricula.fechamatricula_matri)as cantidad2018
+  nivel.nivel_niv as NIVEL,
+  COUNT(matricula.fechamatricula_matri)AS cantidadMatricula,
+  extract(year from matricula.fechamatricula_matri) as año
 FROM 
-  public.matricula 
-  inner join public.nivel on matricula.id_niv = nivel.id_niv
+  public.nivel
+  inner join public.matricula on nivel.id_niv = matricula.id_niv
 WHERE 
-  /*matricula.fechamatricula_matri between '2018-01-01' and '2018-12-31'*/
-  extract(year from matricula.fechamatricula_matri) = 2018
+  (extract(year from matricula.fechamatricula_matri) = 2018 and nivel.nivel_niv = 1 and nivel.descripcion_niv like '%Co%') or
+  (extract(year from matricula.fechamatricula_matri) = 2018 and nivel.nivel_niv = 2 and nivel.descripcion_niv like '%Co%')
+
 GROUP BY
-  nivel.descripcion_niv
+  nivel.descripcion_niv, nivel.nivel_niv, matricula.fechamatricula_matri
