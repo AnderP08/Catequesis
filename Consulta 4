@@ -9,8 +9,9 @@ FROM
   public.nivel
   inner join public.matricula on nivel.id_niv = matricula.id_niv
 WHERE 
-  (extract(year from matricula.fechamatricula_matri) = 2018 and nivel.nivel_niv = 1 and nivel.descripcion_niv like '%Co%') or
-  (extract(year from matricula.fechamatricula_matri) = 2018 and nivel.nivel_niv = 2 and nivel.descripcion_niv like '%Co%')
-
+  (extract(year from matricula.fechamatricula_matri) = 2019 and nivel.descripcion_niv like '%Co%') and
+  (nivel.nivel_niv = 1 or nivel.nivel_niv = 2)
 GROUP BY
   nivel.descripcion_niv, nivel.nivel_niv, matricula.fechamatricula_matri
+ORDER BY
+  nivel.descripcion_niv desc
