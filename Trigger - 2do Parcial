@@ -27,11 +27,14 @@ execute procedure tg_cuposMaximo();
 
 
 --INSERTAR DATOS VERIFICAR TRIGGER
-insert into CATECUMENO values(21, 4, 2, 20, 2, 1314539485, 'Rivera Alvarado', 'Rosa Guadalupe', 'Barrio Santa Ana', '2001-11-08');
-insert into MATRICULA values(21, 4, 2, 30.50, '2018-01-06', 'E1821', 'Aprobado');
 
-insert into MATRICULA values(11, 1, 3, 40.00, '2019-01-06', 'E1903', 'Reprobado');
-insert into MATRICULA values(18, 4, 2, 30.50, '2019-01-06', 'E2003', 'Aprobado');
-insert into MATRICULA values(19, 3, 4, 40.00, '2020-01-06', 'E2004', 'Aprobado');
+--insert into CATECUMENO values(21, 4, 2, 20, 2, 1314539485, 'Rivera Alvarado', 'Rosa Guadalupe', 'Barrio Santa Ana', '2001-11-08');
+--insert into MATRICULA values(21, 4, 2, 30.50, '2018-01-06', 'E1821', 'Aprobado');
+
+--insert into MATRICULA values(11, 1, 3, 40.00, '2019-01-06', 'E1903', 'Reprobado');
+--insert into MATRICULA values(18, 4, 2, 30.50, '2019-01-06', 'E2003', 'Aprobado');
+--insert into MATRICULA values(19, 3, 4, 40.00, '2020-01-06', 'E2004', 'Aprobado');
+
+
 --1er nivel comunion
-insert into MATRICULA values(20, 2, 1, 30.50, '2020-01-06', 'E2005', 'Reprobado');
+--insert into MATRICULA values(20, 2, 1, 30.50, '2020-01-06', 'E2005', 'Reprobado');
