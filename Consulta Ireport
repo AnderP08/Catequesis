@@ -1,4 +1,4 @@
-/*	Cantidad de catecúmeno que son representados por personas ajenas a su familia.*/
+--Reporte en Ireport que muestre cantidad de estudiantes aprobados y reprobados por año.
 
 SELECT 
 	nivel.descripcion_niv, 
