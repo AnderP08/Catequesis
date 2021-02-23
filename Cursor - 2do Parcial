@@ -1,0 +1,21 @@
+do $$
+declare
+	sumar int = 0;
+	asd record;
+	x int;
+	c_prueba cursor for select * from catequista, nivel, matricula
+	where catequista.id_niv = nivel.id_niv and nivel.id_niv = matricula.id_niv and
+	
+	nivel_niv = 2 and descripcion_niv like '%Pri%';
+begin
+--open c_prueba;
+	for x in c_prueba
+	loop
+	sumar = sumar + count(x.id_niv);
+	end loop;
+
+open c_prueba;
+fetch c_prueba into asd;
+raise notice 'Nombre: %, Nivel: % , Cantidad: % ', asd.nombre_cat, asd.nivel_niv, sumar;
+end $$
+language 'plpgsql';
