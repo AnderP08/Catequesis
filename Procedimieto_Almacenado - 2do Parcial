@@ -1,0 +1,19 @@
+--Un procedimiento almacenado que devuelva los ingresos obtenidos por la
+--matrícula de los catecúmenos de un nivel que se le pase como parámetro
+
+
+create or replace function total (varchar, integer)returns decimal
+as
+$$
+Select sum(valor_matri) from matricula, nivel
+
+WHERE
+nivel.id_niv = matricula.id_niv and
+descripcion_niv = $1 and
+nivel_niv = $2
+
+$$
+language SQL;
+
+select total('Primera Comunión', 1);
+--select total('Confirmación', 1);
