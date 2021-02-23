@@ -1,3 +1,5 @@
+--Cursor que muestre el número de matrículas que lleva un nivel y el catequista designado al mismo
+
 do $$
 declare
 	sumar int = 0;
