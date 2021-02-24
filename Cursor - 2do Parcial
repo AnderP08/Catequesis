@@ -2,22 +2,23 @@
 
 do $$
 declare
-	sumar int = 0;
-	asd record;
-	x int;
-	c_prueba cursor for select * from catequista, nivel, matricula
+	cantidad int = 0;
+	datoTabla record;
+	num int;
+	
+	--creacion del cursor
+	c_matriCate cursor for select * from catequista, nivel, matricula
 	where catequista.id_niv = nivel.id_niv and nivel.id_niv = matricula.id_niv and
 	
 	nivel_niv = 2 and descripcion_niv like '%Pri%';
 begin
---open c_prueba;
-	for x in c_prueba
+	for num in c_matriCate
 	loop
-	sumar = sumar + count(x.id_niv);
+	cantidad = cantidad + count(num.id_niv);
 	end loop;
 
-open c_prueba;
-fetch c_prueba into asd;
-raise notice 'Nombre: %, Nivel: % , Cantidad: % ', asd.nombre_cat, asd.nivel_niv, sumar;
+open c_matriCate;
+fetch c_matriCate into datoTabla;
+Raise notice 'Nombre: %, Nivel: % , Cantidad: % ', datoTabla.nombre_cat, datoTabla.nivel_niv, cantidad;
 end $$
 language 'plpgsql';
