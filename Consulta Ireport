@@ -1,5 +1,4 @@
---Reporte en Ireport que muestre cantidad de estudiantes aprobados y reprobados por año.
-
+--Reporte en Ireport que muestre cantidad de catecumenos que son representados por personas ajenas a sus familiares.
 SELECT 
 	nivel.descripcion_niv, 
 	count(representante.familiar_rep)as Cantidad
